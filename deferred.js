@@ -23,15 +23,19 @@ var Database = {
     }
 };
 
+// Database.getValue(0).done(function(result) {
+//    console.log('Got ' + result.Name + ' after ' + result.Timeout);
+// });
+
 jqD.when(
     Database.getValue(0),
     Database.getValue(1)
-).then(function() {
+).then(function(firstResult, secondResult) {
     // This function only gets called if both data access methods resolve
     var dfd = this;
-    console.log('resolved ' + arguments[0].Name + ' and ' + arguments[1].Name + ' with', arguments);
-}, function() {
+    console.log('resolved ' + firstResult.Name + ' and ' + secondResult.Name + ' with', arguments);
+}, function(error) {
     // This function gets called if one data access rejects
     var dfd = this;
-    console.log('rejected with', arguments);
+    console.log('rejected with: ' + error.message, arguments);
 });

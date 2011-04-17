@@ -1,0 +1,15 @@
+Use jQuery Deferreds in nodeJs
+
+Database.getValue(0).done(function(result) {
+    console.log('Got ' + result.Name + ' after ' + result.Timeout);
+});
+
+
+jqD.when(
+    Database.getValue(0),
+    Database.getValue(1)
+).then(function(firstResult, secondResult) {
+    console.log('resolved ' + firstResult.Name + ' and ' + secondResult.Name + ' with', arguments);
+}, function(error) {
+    console.log('rejected with: ' + error.message, arguments);
+});
